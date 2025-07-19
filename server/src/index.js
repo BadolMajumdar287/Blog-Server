@@ -1,8 +1,8 @@
 import express from "express";
 import {config} from  "dotenv";
 import cookieparser from "cookie-parser";
-import { AdminController } from "./controller/admin.controller.js";
-import { BlogController } from "./controller/blog.controller.js";
+import { AdminRouter } from "./router/admin.router.js";
+import { BlogRouter } from "./router/blog.router.js";
 import { Databaseconfig } from "./config/mongoose.config.js";
 
 
@@ -18,8 +18,8 @@ app.use(cookieparser());
 
 
 
-app.use("/api/admin", AdminController);
-app.use("/api/blog", BlogController);
+app.use("/api/admin", AdminRouter);
+app.use("/api/blog", BlogRouter);
 
 
 Databaseconfig();

@@ -1,14 +1,14 @@
-import { Router } from "express";
-import { AdminController, AdminController } from "../controller/admin.controller.js";
+import express from "express";
+import { AdminController } from "../controller/admin.controller.js";
+import { AdminMiddleware } from "../middleware/admin.middleware.js";
+
+const A = new AdminController();
+export const AdminRouter = express.Router()
 
 
-const AdminController = new AdminController();
-const AdminRouter = Router();
-
-
-AdminRouter.post("/register", AdminController.Register);
-AdminRouter.post("/login", AdminController.Login);
-AdminRouter.get("/session", AdminController.Session);
-AdminRouter.get("/logout", AdminController.Logout);
+AdminRouter.post("/register", A.Register);
+AdminRouter.post("/login", A.Login);
+AdminRouter.get("/session", AdminMiddleware, A.Session);
+AdminRouter.get("/logout", AdminMiddleware, A.Logout);
 
 
