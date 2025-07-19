@@ -3,6 +3,7 @@ import {config} from  "dotenv";
 import cookieparser from "cookie-parser";
 import { AdminController } from "./controller/admin.controller.js";
 import { BlogController } from "./controller/blog.controller.js";
+import { Databaseconfig } from "./config/mongoose.config.js";
 
 
 config();
@@ -21,7 +22,7 @@ app.use("/api/admin", AdminController);
 app.use("/api/blog", BlogController);
 
 
-
+Databaseconfig();
 
 app.listen(PORT, ()=> {
     console.log(`Server is running on port ${PORT}`);
