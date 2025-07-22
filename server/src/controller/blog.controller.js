@@ -1,6 +1,7 @@
 import { sendResponse } from "../lib/response.js";
 import { BlogModel } from "../model/blog.model.js";
 
+
 export class BlogController{
 
 
@@ -13,12 +14,13 @@ export class BlogController{
            const adminId = req.admin._id
             
             if(!adminId) return sendResponse(res,403,{error: "Admin is not authenticated."});
-
+            const advator = req.file
+           
             const {title, content} = req.body;
            
             if(!title || !content) return sendResponse(res,400,{error: "Title and content are required."});
             
-            const blog = BlogModel.create({adminId,title,content});
+            const blog = BlogModel.create({adminId,advator,title,content});
 
             if(!blog) return sendResponse(res,400,{error: "Blog could not be created."});
 

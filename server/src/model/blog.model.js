@@ -3,11 +3,18 @@ import { model,Schema, Types } from "mongoose";
 
 const BlogSchema = new Schema({
 
+         
          adminId: {
             type : Types.ObjectId,
             ref: "admin",
             required: true,
          },
+
+         advator: {
+            type: Array,
+            required: true,
+         },
+
 
         title: {
             type: String,
