@@ -1,5 +1,8 @@
 import { sendResponse } from "../lib/response.js";
 import { BlogModel } from "../model/blog.model.js";
+import fs from "fs";
+
+
 
 
 export class BlogController{
@@ -15,14 +18,16 @@ export class BlogController{
             
             if(!adminId) return sendResponse(res,403,{error: "Admin is not authenticated."});
             const advator = req.file
-           
+             
             const {title, content} = req.body;
            
             if(!title || !content) return sendResponse(res,400,{error: "Title and content are required."});
-            
+             
             const blog = BlogModel.create({adminId,advator,title,content});
 
             if(!blog) return sendResponse(res,400,{error: "Blog could not be created."});
+
+             fs.cpSync("src/tmp", "public", { recursive: true });
 
             return sendResponse(res,201,{message: "Blog created successfully.",blog});
 
@@ -35,7 +40,7 @@ export class BlogController{
       }
 
 
-
+  
 
 
 

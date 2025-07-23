@@ -7,6 +7,7 @@ import { BlogRouter } from "./router/blog.router.js";
 import { Databaseconfig } from "./config/mongoose.config.js";
 
 
+
 config();
 const PORT = process.env.PORT || 5000;
 
@@ -16,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieparser());
-
+app.use(express.static("./public"));
 
 
 
