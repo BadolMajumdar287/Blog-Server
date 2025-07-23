@@ -40,8 +40,7 @@ export class BlogController{
 
 
 
-
-      async GetAll(req,res){
+ async GetAll(req,res){
           
         try {
 
@@ -60,6 +59,7 @@ export class BlogController{
             console.error(error);
             return sendResponse(res,500,{error: "Internal Server Error"});
         }
+     
       }
 
 
