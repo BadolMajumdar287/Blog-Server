@@ -6,6 +6,7 @@ import { AdminRouter } from "./router/admin.router.js";
 import { BlogRouter } from "./router/blog.router.js";
 import { Databaseconfig } from "./config/mongoose.config.js";
 import { CommentRouter } from "./router/comment.router.js";
+import { AuthRouter } from "./router/auth.router.js";
 
 
 
@@ -33,7 +34,8 @@ app.use(cors({
 
 app.use("/api/admin", AdminRouter);
 app.use("/api/blog", BlogRouter);
-app.use("/api/comment",CommentRouter)
+app.use("/api/user", AuthRouter);
+app.use("/api/comment",CommentRouter);
 
 
 Databaseconfig();
