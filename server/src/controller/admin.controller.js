@@ -1,7 +1,7 @@
 import { sendResponse } from "../lib/response.js";
 import { Adminmodel } from "../model/admin.model.js";
 import { hashPassword,comparePassword } from "../lib/bcrypt.js";
-import { setSessionCookie,clearSessionCookie } from "../lib/cookie.js";
+import { setSessionCookieAdmin,clearSessionCookieAdmin } from "../lib/admin.cookie.js";
 
 export class  AdminController {
 
@@ -21,7 +21,7 @@ export class  AdminController {
                     
                      if(!admin) return sendResponse(res,500,{error: "failed to create admin"});
 
-                     setSessionCookie(res, admin._id.toString());
+                     setSessionCookieAdmin(res, admin._id.toString());
                      
                      return sendResponse(res,201,{message: "Admin registered successfully",admin});
                     
@@ -41,18 +41,18 @@ export class  AdminController {
                   try {
 
                     const {email,password} = req.body;
-
+                          
                      if(!email || !password) return sendResponse(res,400,{error: "All fields are required"});
 
                      const admin = await Adminmodel.findOne({email});
 
                      if (!admin) return sendResponse(res,404,{error: "Invalid Credentials."});
 
-                    const ispaswordValied = comparePassword(password, admin.password);
+                    const ispaswordValied = await comparePassword(password, admin.password);
 
                     if(!ispaswordValied) return sendResponse(res,400,{error: "Invalid Credentials."});
 
-                    setSessionCookie(res, admin._id.toString());
+                    setSessionCookieAdmin(res, admin._id.toString());
                      
                     return sendResponse(res,200,{message: "Login successful",admin});
 
@@ -105,7 +105,7 @@ export class  AdminController {
 
                     if(!admin) return sendResponse(res,400,{error: "Admin Not Found"});
 
-                    clearSessionCookie(res);
+                    clearSessionCookieAdmin(res);
 
                     return sendResponse (res,200,{message: "Logout successful."});
                     

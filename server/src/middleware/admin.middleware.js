@@ -6,11 +6,11 @@ export const AdminMiddleware = async (req, res, next) => {
 
     try {
 
-        const SessionKey = req.cookies["session"] || req.headers["session"];
+        const SessionKeyAdmin = req.cookies["session"] || req.headers["session"];
             
-        if(!SessionKey) return sendResponse(res,403,{error: "Session is Not valied."});
+        if(!SessionKeyAdmin) return sendResponse(res,403,{error: "Session is Not valied."});
 
-         const admin = await Adminmodel.findById(SessionKey);
+         const admin = await Adminmodel.findById(SessionKeyAdmin);
 
          if(!admin) return sendResponse(res,403,{error: "Session is not valied."});
 

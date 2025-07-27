@@ -3,10 +3,10 @@
 
 import { sendResponse } from "../lib/response.js";
 import { userModel } from "../model/user.model.js";
-import { setSessionCookie } from "../lib/cookie.js";
 import { hashPassword } from "../lib/bcrypt.js";
 import { comparePassword } from "../lib/bcrypt.js";
-import { clearSessionCookie } from "../lib/cookie.js";
+import { setSessionCookieUser,clearSessionCookieUser } from "../lib/user.cookie.js";
+
 
 
 
@@ -28,7 +28,7 @@ export class AuthController {
 
             if(!user) return sendResponse(res,404,{error: "User Not Register."});
 
-            setSessionCookie(res,user._id.toString());
+            setSessionCookieUser(res,user._id.toString());
 
             return sendResponse(res,201,{message: "user create Succesfully",user});
 
@@ -61,7 +61,7 @@ export class AuthController {
 
               if(!ispaswordValied) return sendResponse(res,404,{error: "Invalid Credentials."});
 
-              setSessionCookie(res,user._id.toString());
+              setSessionCookieUser(res,user._id.toString());
 
               return sendResponse(res,200,{error: "Login Sucessfully.",user});
 
@@ -111,7 +111,7 @@ export class AuthController {
 
             if(!user) return sendResponse(res,404,{error: "User Not found."});
 
-            clearSessionCookie(res);
+            clearSessionCookieUser(res);
 
             return sendResponse(res,200,{message: "Logout Succesfully."})
 
