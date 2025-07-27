@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { AdminController } from "../controller/admin.controller.js";
+import { AuthController } from "../controller/auth.controller.js";
 
 export const AuthRouter = Router();
-const A = new AdminController();
+const A = new AuthController();
 
 
-AuthRouter.post("/create", A.Register);
-AuthRouter.post("/login", A.Login);
-AuthRouter.get("/session",A.Session);
-AuthRouter.get("/logout", A.Logout);
+AuthRouter.post("/create", A.UserRegister);
+AuthRouter.post("/login", A.UserLogin);
+AuthRouter.get("/session",A.UserSession);
+AuthRouter.get("/logout", A.UserLogout);
 

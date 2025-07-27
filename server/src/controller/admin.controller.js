@@ -21,7 +21,7 @@ export class  AdminController {
                     
                      if(!admin) return sendResponse(res,500,{error: "failed to create admin"});
 
-                     setSessionCookie(res, admin._id,toString());
+                     setSessionCookie(res, admin._id.toString());
                      
                      return sendResponse(res,201,{message: "Admin registered successfully",admin});
                     
