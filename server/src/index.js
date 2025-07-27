@@ -7,6 +7,9 @@ import { BlogRouter } from "./router/blog.router.js";
 import { Databaseconfig } from "./config/mongoose.config.js";
 import { CommentRouter } from "./router/comment.router.js";
 import { AuthRouter } from "./router/auth.router.js";
+import { LikeRouter } from "./router/like.router.js";
+import { DislikeRouter } from "./router/dislike.router.js";
+
 
 
 
@@ -36,6 +39,8 @@ app.use("/api/admin", AdminRouter);
 app.use("/api/blog", BlogRouter);
 app.use("/api/users", AuthRouter);
 app.use("/api/comments",CommentRouter);
+app.use("/api/like",LikeRouter);
+app.use("/api/dislike",DislikeRouter);
 
 
 Databaseconfig();
