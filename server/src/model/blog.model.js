@@ -6,7 +6,7 @@ const BlogSchema = new Schema({
          
          adminId: {
             type : Types.ObjectId,
-            ref: "admin",
+            ref: "admins",
             required: true,
          },
 
@@ -34,4 +34,4 @@ const BlogSchema = new Schema({
 
 
 
-export const BlogModel = model("blog",BlogSchema);
+export const BlogModel = model("blogs",BlogSchema);
