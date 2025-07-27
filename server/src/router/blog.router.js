@@ -12,3 +12,4 @@ BlogRouter.get("/getall", AdminMiddleware, B.GetAll);
 BlogRouter.get("/getbyid/:id", AdminMiddleware, B.GetById);
 BlogRouter.put("/update/:id", AdminMiddleware, B.Update);
 BlogRouter.delete("/delete/:id", AdminMiddleware, B.Delete);
+  

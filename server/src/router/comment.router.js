@@ -1,13 +1,17 @@
 import { Router } from "express";
 import { CommentController } from "../controller/comment.controller.js";
+import { AdminOrUserMiddleware } from "../middleware/admin.user.middleware.js";
+import { AdminMiddleware } from "../middleware/admin.middleware.js";
+
 
 export const CommentRouter = Router();
 const C = new CommentController();
 
 
-CommentRouter.post("/create", C.CommentCreate);
-CommentRouter.get("/getall", C.CommentGetAll);
-CommentRouter.get("/getbyid", C.CommentGetById);
-CommentRouter.delete("/delete",C.CommentDelete);
+CommentRouter.post("/create", AdminOrUserMiddleware, C.CommentCreate);
+CommentRouter.get("/getall", AdminOrUserMiddleware , C.CommentGetAll);
+CommentRouter.get("/getbyid/:id", AdminOrUserMiddleware, C.CommentGetById);
+CommentRouter.delete("/delete/:id", AdminOrUserMiddleware, C.CommentDelete);
 
 
+    

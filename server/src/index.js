@@ -34,8 +34,8 @@ app.use(cors({
 
 app.use("/api/admin", AdminRouter);
 app.use("/api/blog", BlogRouter);
-app.use("/api/user", AuthRouter);
-app.use("/api/comment",CommentRouter);
+app.use("/api/users", AuthRouter);
+app.use("/api/comments",CommentRouter);
 
 
 Databaseconfig();

@@ -50,7 +50,7 @@ export class AuthController {
         try {
 
              const {email,password} = req.body;
-
+                 
              if(!email || !password) return sendResponse(res,404,{error: "All fields are required." });
 
              const user = await userModel.findOne({email});
@@ -62,7 +62,8 @@ export class AuthController {
               if(!ispaswordValied) return sendResponse(res,404,{error: "Invalid Credentials."});
 
               setSessionCookieUser(res,user._id.toString());
-
+             
+                 
               return sendResponse(res,200,{error: "Login Sucessfully.",user});
 
             
