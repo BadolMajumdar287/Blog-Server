@@ -11,7 +11,7 @@ export class CommentController {
         
             try {
 
-            const adminId = req.admin._id;
+            const adminId = req.admin?._id;
          
             const userId = req.user?._id;
             
@@ -20,7 +20,7 @@ export class CommentController {
             if( !adminId && !userId) return sendResponse(res,403,{error: "Session Is not valied"})
 
             const {comment} = req.body;
-             console.log(comment)
+           
                
             if(!comment) return sendResponse(res,404,{error: "Comment Is not found."});
                 

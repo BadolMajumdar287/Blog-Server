@@ -39,8 +39,8 @@ app.use("/api/admin", AdminRouter);
 app.use("/api/blog", BlogRouter);
 app.use("/api/users", AuthRouter);
 app.use("/api/comments",CommentRouter);
-app.use("/api/like",LikeRouter);
-app.use("/api/dislike",DislikeRouter);
+app.use("/api/likes",LikeRouter);
+app.use("/api/dislikes",DislikeRouter);
 
 
 Databaseconfig();

@@ -9,7 +9,7 @@ export const UserMiddleware = async (req,res,next) => {
        try {
           
         const SessionKeyUser = req.cookies["sessionUser"] || req.headers["sessionUser"];
-               
+               console.log(SessionKeyUser)
         if(!SessionKeyUser) return sendResponse(res,403,{error: "Session is not valid."});
 
          const user = await userModel.findById(SessionKeyUser);
