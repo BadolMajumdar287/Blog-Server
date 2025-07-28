@@ -12,3 +12,27 @@ export const AdminOrUserMiddleware = async (req, res, next) => {
     });
   });
 };
+
+
+
+
+// export const AdorUsMiddleware =async(req,res) => {
+       
+//       try {
+
+//            if(AdminMiddleware){
+//               return AdminMiddleware;
+//            }  else if(UserMiddleware){
+//               return UserMiddleware;
+//            }
+            
+        
+//        } catch (error) {
+
+//           console.error(error);
+//           return sendResponse(res,500,{error: "Internal Server Error."})
+        
+//        }
+// }
+
+

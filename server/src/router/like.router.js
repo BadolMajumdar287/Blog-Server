@@ -7,6 +7,6 @@ export const LikeRouter = Router();
 const L = new LikeController();
 
 LikeRouter.post("/create", UserMiddleware, L.Like);
-LikeRouter.get("/getall", L.GetAllLike);
+LikeRouter.get("/getall", UserMiddleware,L.GetAllLike);
 
 
