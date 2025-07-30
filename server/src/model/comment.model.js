@@ -3,10 +3,20 @@ import { model, Schema, Types } from "mongoose";
 
 const CommentSchema = new Schema({
 
+     blogId  : {
+           type : Types.ObjectId,
+            ref : "blogs",
+       required : true 
+
+                 },
+
+
+
     adminId : {
         type: Types.ObjectId,
          ref: "admins",
         },
+
 
      userId : {
         type: Types.ObjectId,

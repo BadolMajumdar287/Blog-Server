@@ -23,11 +23,11 @@ export class LikeController {
 
           if(exitAdminandUser) return sendResponse(res,400,{error: "you are create like"})
             
-          const {like} = req.body;
+          const {like,blogId} = req.body;
+            
+          if(!like || ! blogId) return sendResponse(res,404,{error: "like Is not found."});
 
-          if(!like) return sendResponse(res,404,{error: "like Is not found."});
-
-          let likedata = {like}
+          let likedata = {like,blogId}
 
            if(adminId){
               likedata.adminId = adminId;

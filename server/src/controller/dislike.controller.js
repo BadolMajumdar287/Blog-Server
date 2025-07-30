@@ -18,13 +18,17 @@ export class DisLikeController {
                   
                 if( !adminId && !userId) return sendResponse(res,403,{error: "Session Is not valied"});
 
-                 const existadminuser = await DislikeModel.findOne({adminId,userId});
+                  const {disLike,blogId} = req.body;
+                 
+                 if(!disLike || !blogId) return sendResponse(res,400,{error: "blogId and disLike are required"});
+                 
+                  
+              const exist = await DislikeModel.findOne({blogId, ...(adminId ? {adminId} : {userId})});
 
-                 if(existadminuser) return sendResponse(res,403,{error: "exit dislike"});
+              if(exist) return sendResponse(res, 409, { error: "Already disliked this blog" });
+                 
 
-                 const {disLike} = req.body;
-
-                 let disLikedata = {disLike};
+                 let disLikedata = {disLike,blogId};
 
                  if(adminId){
                     disLikedata.adminId = adminId
@@ -49,11 +53,11 @@ export class DisLikeController {
             
                try {
 
-                  const getall = await DislikeModel.find();
+                  const alldislike = await DislikeModel.find();
 
-                  if(!getall) return sendResponse(res,300,{error: "Not get all Dislike"});
+                  if(!alldislike) return sendResponse(res,300,{error: "Not get all Dislike"});
 
-                  sendResponse(res,200,{message: "get all dislike.",getall})
+                  sendResponse(res,200,{message: "get all dislike.",alldislike})
 
                 
                 } catch (error) {

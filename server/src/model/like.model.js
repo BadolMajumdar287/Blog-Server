@@ -3,6 +3,14 @@ import { model,Schema,Types } from "mongoose";
 
 const LikeSchema = new Schema({
    
+        blogId  : {
+           type : Types.ObjectId,
+            ref : "blogs",
+       required : true 
+
+                 },
+
+
       adminId : {
               type: Types.ObjectId,
                ref: "admins",
