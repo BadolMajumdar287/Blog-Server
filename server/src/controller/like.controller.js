@@ -19,27 +19,27 @@ export class LikeController {
 
          if( !adminId && !userId) return sendResponse(res,403,{error: "Session Is not valied"})
 
-          const exitAdminandUser = await LikeModel.findOne({adminId,userId});
-
-          if(exitAdminandUser) return sendResponse(res,400,{error: "you are create like"})
-            
           const {like,blogId} = req.body;
-            
-          if(!like || ! blogId) return sendResponse(res,404,{error: "like Is not found."});
+             
+          if(!like || !blogId) return sendResponse(res,401,{error: "Missing required params."});
 
-          let likedata = {like,blogId}
+          const exiting = await LikeModel.findOne({blogId, ...(adminId ? { adminId } : { userId }),});
+
+          if(exiting) return sendResponse(res,401,{error: "you are already like this blog."});
+
+          let LikeData = {like,blogId}
 
            if(adminId){
-              likedata.adminId = adminId;
+              LikeData.adminId = adminId;
            }else if(userId){
-              likedata.userId = userId;
+              LikeData.userId = userId;
            }
 
-           const createLike = await LikeModel.create(likedata);
+          const createLike = await LikeModel.create(LikeData)
+                
+          if(!createLike) return sendResponse(res,409,{error: "Like is not create."});
 
-           if(!createLike) return sendResponse(res,404,{error: "like is not create"});
-
-           return sendResponse(res,200,{message: "craete like.",createLike})
+          return sendResponse(res,200,{message: "Like is create successfully",createLike});
             
         } catch (error) {
             console.error(error);

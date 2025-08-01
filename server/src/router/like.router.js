@@ -6,7 +6,7 @@ import { AdminOrUserMiddleware } from "../middleware/admin.user.middleware.js";
 export const LikeRouter = Router();
 const L = new LikeController();
 
-LikeRouter.post("/create", UserMiddleware, L.Like);
-LikeRouter.get("/getall", UserMiddleware,L.GetAllLike);
+LikeRouter.post("/create", AdminOrUserMiddleware, L.Like);
+LikeRouter.get("/getall", L.GetAllLike);
 
 

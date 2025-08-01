@@ -8,7 +8,8 @@ import { Databaseconfig } from "./config/mongoose.config.js";
 import { CommentRouter } from "./router/comment.router.js";
 import { AuthRouter } from "./router/auth.router.js";
 import { LikeRouter } from "./router/like.router.js";
-import { DislikeRouter } from "./router/dislike.router.js";
+import { CommentLikeRouter } from "./router/comment.like.router.js";
+
 
 
 
@@ -40,7 +41,12 @@ app.use("/api/blog", BlogRouter);
 app.use("/api/users", AuthRouter);
 app.use("/api/comments",CommentRouter);
 app.use("/api/likes",LikeRouter);
-app.use("/api/dislikes",DislikeRouter);
+app.use("/api/commentlikes",CommentLikeRouter);
+
+app.get("/get", (req, res) => {
+  res.send("Server is running"); 
+});
+
 
 
 Databaseconfig();
@@ -48,3 +54,6 @@ Databaseconfig();
 app.listen(PORT, ()=> {
     console.log(`Server is running on port ${PORT}`);
 })
+
+
+//mongodbpassword = badol12345

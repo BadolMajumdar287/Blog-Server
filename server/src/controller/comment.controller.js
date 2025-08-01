@@ -120,20 +120,26 @@ export class CommentController {
         
             try {
 
-                  const commentId = req.params.id;
+
                   const userId = req.user?._id;
-                       
-                  if(!userId) return sendResponse(res,401,{message: "user is not valied"})
-                    
-                  if(!commentId) return sendResponse(res,403,{error: "comment id is not here"});
+                  const adminId = req.admin?._id;
+                
+                   if(!userId && !adminId) return sendResponse(res,403,{error: "Session is not valied."})
+                     
+                   const commentId = req.params.id;
+                        
+                   if(!commentId) return sendResponse(res,403,{error: "comment id is not here"});
 
                   const  comment = await CommentModel.findById(commentId);
 
                   if(!comment) return sendResponse(res,404,{error: "comment Not found."})
 
-                  if (comment.userId.toString() !== userId.toString()) return sendResponse(res,403,{ error: "You are not authorized to delete this comment"});
+                  const isUser = comment.userId?.toString() === String(userId);
+                  const isAdmin = comment.adminId?.toString() === String(adminId); 
+                  
+                  if(!isUser && !isAdmin) return sendResponse(res,403,{error: "Unauthorized to delete this comment."})
                      
-                     const commentDelete = await comment.deleteOne();
+                     const commentDelete =  await CommentModel.deleteOne({ _id: commentId });
 
                   if(!commentDelete) return sendResponse(res,403,{error: "Comment not deleted"})
 

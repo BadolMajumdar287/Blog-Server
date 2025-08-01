@@ -9,10 +9,10 @@ export const CommentRouter = Router();
 const C = new CommentController();
 
 
-CommentRouter.post("/create",UserMiddleware, C.CommentCreate);
-CommentRouter.get("/getall", UserMiddleware , C.CommentGetAll);
-CommentRouter.get("/getbyid/:id", UserMiddleware, C.CommentGetById);
-CommentRouter.delete("/delete/:id", UserMiddleware, C.CommentDelete);
+CommentRouter.post("/create",AdminOrUserMiddleware, C.CommentCreate);
+CommentRouter.get("/getall",  C.CommentGetAll);
+CommentRouter.get("/getbyid/:id", AdminOrUserMiddleware, C.CommentGetById);
+CommentRouter.delete("/delete/:id", AdminOrUserMiddleware, C.CommentDelete);
 
 
     

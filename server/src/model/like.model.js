@@ -22,10 +22,10 @@ const LikeSchema = new Schema({
        
               },
 
-        Like : {
+        like : {
              type: Boolean,
           default: false,
-        required : true,
+          
         }
 
 },
