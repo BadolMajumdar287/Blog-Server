@@ -29,7 +29,7 @@ app.use(express.static("./public"));
 
 
 app.use(cors({
-    origin: ["http://localhost:3000", "http://192.168.100.191:3000"],
+    origin: ["http://localhost:3000", "https://blog-client-avhc.vercel.app"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
 }));
