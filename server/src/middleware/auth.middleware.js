@@ -11,8 +11,14 @@ export const UserMiddleware = async (req,res,next) => {
         const SessionKeyUser = req.cookies["sessionUser"] || req.headers["sessionUser"];
                
         if(!SessionKeyUser) return sendResponse(res,403,{error: "Session is not valid."});
+        
+         const trimmed = SessionKeyUser.trim();
 
-         const user = await userModel.findById(SessionKeyUser);
+       if (!mongoose.Types.ObjectId.isValid(trimmed)) return sendResponse(res, 403, { error: "Invalid session format." });
+    
+
+
+         const user = await userModel.findById(trimmed);
               
          if(!user) return sendResponse(res,404,{error: "user not found."});
 

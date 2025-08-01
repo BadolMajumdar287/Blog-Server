@@ -1,6 +1,6 @@
 import { sendResponse } from "../lib/response.js";
 import { Adminmodel } from "../model/admin.model.js";
-
+import mongoose from "mongoose";
 
 export const AdminMiddleware = async (req, res, next) => {
 
@@ -10,8 +10,12 @@ export const AdminMiddleware = async (req, res, next) => {
            
         if(!SessionKeyAdmin) return sendResponse(res,403,{error: "Session is Not valied."});
 
+                const trimmed = SessionKeyAdmin.trim();
+
+        if (!mongoose.Types.ObjectId.isValid(trimmed))  return sendResponse(res, 403, { error: "Invalid session format." });
+
      
-       const admin = await Adminmodel.findById(SessionKeyAdmin);
+       const admin = await Adminmodel.findById(trimmed);
              
          if(!admin) return sendResponse(res,403,{error: "Session is not valied."});
 
