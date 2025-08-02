@@ -1,5 +1,6 @@
 import { userModel } from "../model/user.model.js";
 import { sendResponse } from "../lib/response.js";
+import mongoose from "mongoose";
 
 
 export const UserMiddleware = async (req,res,next) => {
